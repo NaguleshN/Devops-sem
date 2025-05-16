@@ -59,6 +59,24 @@
       padding: 8px 15px;
       border-radius: 4px;
       cursor: pointer;
+      margin: 5px;
+    }
+
+    .quantity-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .quantity-control button {
+      padding: 5px 10px;
+      font-size: 16px;
+    }
+
+    .quantity {
+      margin: 0 10px;
+      font-weight: bold;
     }
 
     footer {
@@ -85,26 +103,43 @@
   <div class="container">
     <h2>Featured Products</h2>
     <div class="product-grid">
+      
       <div class="product-card">
         <img src="#" alt="Apple" />
         <h3>Apple</h3>
         <p>₹120/kg</p>
-        <button onclick="Alert('Apple added to your cart')">Add to Cart</button>
+        <div class="quantity-control">
+          <button onclick="changeQuantity(this, -1)">-</button>
+          <span class="quantity">1</span>
+          <button onclick="changeQuantity(this, 1)">+</button>
+        </div>
+        <button onclick="addToCart(this, 'Apple')">Add to Cart</button>
       </div>
 
       <div class="product-card">
         <img src="#" alt="Milk" />
         <h3>Milk</h3>
         <p>₹50/litre</p>
-        <button>Add to Cart</button>
+        <div class="quantity-control">
+          <button onclick="changeQuantity(this, -1)">-</button>
+          <span class="quantity">1</span>
+          <button onclick="changeQuantity(this, 1)">+</button>
+        </div>
+        <button onclick="addToCart(this, 'Milk')">Add to Cart</button>
       </div>
 
       <div class="product-card">
         <img src="#" alt="Bread" />
         <h3>Bread</h3>
         <p>₹35/loaf</p>
-        <button>Add to Cart</button>
+        <div class="quantity-control">
+          <button onclick="changeQuantity(this, -1)">-</button>
+          <span class="quantity">1</span>
+          <button onclick="changeQuantity(this, 1)">+</button>
+        </div>
+        <button onclick="addToCart(this, 'Bread')">Add to Cart</button>
       </div>
+
     </div>
   </div>
 
@@ -112,5 +147,19 @@
     &copy; 2025 Nagulesh. All rights reserved.
   </footer>
 
+  <script>
+    function changeQuantity(btn, change) {
+      const quantitySpan = btn.parentElement.querySelector('.quantity');
+      let currentQty = parseInt(quantitySpan.textContent);
+      currentQty += change;
+      if (currentQty < 1) currentQty = 1;
+      quantitySpan.textContent = currentQty;
+    }
+
+    function addToCart(btn, productName) {
+      const quantity = btn.parentElement.querySelector('.quantity').textContent;
+      alert(`${productName} (${quantity}) added to your cart`);
+    }
+  </script>
 </body>
 </html>
